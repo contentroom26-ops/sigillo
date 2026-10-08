@@ -26,7 +26,7 @@ function Navbar() {
       let d = false;
       els.forEach((el) => {
         const r = el.getBoundingClientRect();
-        if (r.top <= probe && r.bottom > probe) d = el.dataset.nav === "dark";
+        if (r.top <= probe && r.bottom > probe) d = el.dataset["nav"] === "dark";
       });
       setDark(d);
     };
