@@ -9,7 +9,7 @@ type Tone = "light" | "dark";
 type Size = "md" | "sm";
 
 const base =
-  "group inline-flex w-fit items-center rounded-full font-medium transition duration-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-tan";
+  "group inline-flex w-fit shrink-0 items-center whitespace-nowrap rounded-full font-medium transition duration-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-tan";
 
 const sizes: Record<Size, string> = {
   md: "gap-4 py-3 pl-7 pr-3 text-base",

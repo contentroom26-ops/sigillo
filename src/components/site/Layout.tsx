@@ -47,7 +47,7 @@ function useNavTone(path: string) {
   return { dark, scrolled };
 }
 
-function Navbar({ isHome }: { isHome: boolean }) {
+function Navbar() {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
   const { dark, scrolled } = useNavTone(path);
@@ -75,9 +75,7 @@ function Navbar({ isHome }: { isHome: boolean }) {
               {n.label}
             </Link>
           ))}
-          {isHome
-            ? <Cta href="#parliamo" size="sm" tone={onDark ? "dark" : "light"}>Parliamo</Cta>
-            : <Cta to="/contatti" size="sm" tone={onDark ? "dark" : "light"}>Parliamo</Cta>}
+          <Cta to="/contatti" size="sm" tone={onDark ? "dark" : "light"}>Parliamo</Cta>
         </nav>
         <button className={`md:hidden ${onDark ? "text-ink-foreground" : "text-ink"}`} onClick={() => setOpen((o) => !o)} aria-label="Menu">
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -96,7 +94,7 @@ function Navbar({ isHome }: { isHome: boolean }) {
 }
 
 /** Pulsante fisso su mobile: resta visibile finché non si arriva al form o al footer. */
-function MobileCta({ isHome }: { isHome: boolean }) {
+function MobileCta() {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [show, setShow] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -122,9 +120,7 @@ function MobileCta({ isHome }: { isHome: boolean }) {
   if (path === "/contatti") return null;
   return (
     <div className={`fixed inset-x-0 bottom-4 z-40 flex justify-center px-6 transition duration-300 md:hidden ${show && !hidden ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"}`}>
-      {isHome
-        ? <Cta href="#parliamo" tone="light">Parliamo del tuo progetto</Cta>
-        : <Cta to="/contatti" tone="light">Parliamo del tuo progetto</Cta>}
+      <Cta to="/contatti" tone="light">Parliamo del tuo progetto</Cta>
     </div>
   );
 }
@@ -176,13 +172,12 @@ function Footer() {
 }
 
 export function Layout({ children }: { children: ReactNode }) {
-  const isHome = useRouterState({ select: (s) => s.location.pathname === "/" });
   return (
     <>
-      <Navbar isHome={isHome} />
+      <Navbar />
       <main>{children}</main>
       <Footer />
-      <MobileCta isHome={isHome} />
+      <MobileCta />
     </>
   );
 }
