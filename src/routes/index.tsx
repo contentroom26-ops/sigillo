@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
-import { Cta, ArrowDot, ctaClasses } from "@/components/site/Cta";
+import { Cta } from "@/components/site/Cta";
 import hero from "@/assets/hero-macchina.jpg";
 import lab from "@/assets/lab.jpg";
 import materials from "@/assets/materials.jpg";
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
 const services = [
   { t: "Prototipia", d: "Dal brief al campione approvato. Sviluppiamo cartamodelli, scegliamo pellami e accessori, costruiamo il prototipo fino alla versione definitiva.", to: "/prototipia" },
   { t: "Produzione", d: "Private label, conto terzi o piccole serie. Una filiera interna che garantisce costanza, tempi chiari e controllo su ogni pezzo.", to: "/produzione" },
-  { t: "Materiali", d: "Accesso diretto alle concerie e ai fornitori di accessori del distretto toscano. Selezioniamo con te pellami, finiture e fibbie.", to: "/prototipia" },
+  { t: "Materiali", d: "Accesso diretto alle concerie e ai fornitori di accessori del distretto toscano. Selezioniamo con te pellami, finiture e fibbie.", to: "/prototipia", hash: "materiali" },
 ] as const;
 
 const models = [
@@ -74,67 +74,12 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   return <span ref={ref}>{n}{suffix}</span>;
 }
 
-const field = "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-lg outline-none transition placeholder:text-muted-foreground/60 focus:border-ink";
-
-function ContactForm() {
-  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    setState("sending");
-    setTimeout(() => setState("done"), 800);
-  };
-
-  if (state === "done") {
-    return (
-      <div className="border-t-2 border-ink pt-10">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-ink-foreground">
-          <Check className="h-6 w-6" />
-        </span>
-        <h3 className="display mt-8 text-3xl md:text-4xl">Grazie, messaggio ricevuto.</h3>
-        <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
-      </div>
-    );
-  }
-
-  const c = ctaClasses("solid", "light");
-  return (
-    <form onSubmit={submit} className="grid gap-8">
-      <div className="grid gap-8 sm:grid-cols-2">
-        <label className="block"><span className="eyebrow text-muted-foreground">Nome *</span><input required name="nome" className={field} /></label>
-        <label className="block"><span className="eyebrow text-muted-foreground">Email *</span><input required type="email" name="email" className={field} /></label>
-      </div>
-      <label className="block"><span className="eyebrow text-muted-foreground">Azienda (opzionale)</span><input name="azienda" className={field} /></label>
-      <label className="block">
-        <span className="eyebrow text-muted-foreground">Tipo di richiesta *</span>
-        <select required name="tipo" defaultValue="" className={field}>
-          <option value="" disabled>Seleziona</option>
-          <option>Prototipia</option>
-          <option>Private Label</option>
-          <option>Conto Terzi</option>
-          <option>Piccole Serie</option>
-          <option>Altro</option>
-        </select>
-      </label>
-      <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={4} className={`${field} resize-none`} /></label>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <button disabled={state === "sending"} className={`${c.box} disabled:opacity-60`}>
-          <span>{state === "sending" ? "Invio in corso…" : "Invia richiesta"}</span>
-          <ArrowDot className={c.dot} />
-        </button>
-        <p className="text-sm text-muted-foreground">Rispondiamo entro due giorni lavorativi. Nessun impegno.</p>
-      </div>
-    </form>
-  );
-}
-
 function Home() {
   return (
     <Layout>
       {/* 1 · Hero + numeri — scuro, con foto di sfondo e overlay */}
       <section data-nav="dark" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-ink-foreground">
-        <img src={hero} alt="Artigiano che guida un pezzo di pelle sotto una macchina da cucire industriale" width={2000} height={1333} fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover [filter:sepia(0.3)_saturate(1.1)_contrast(1.05)]" />
-        {/* filtro caldo: porta la foto sui toni cuoio del sito */}
-        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-leather mix-blend-color opacity-70" />
+        <img src={hero} alt="Artigiano che guida un pezzo di pelle sotto una macchina da cucire industriale" width={2000} height={1333} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/55 to-ink/90" />
 
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pb-16 pt-32 md:px-10 md:pb-20 md:pt-40">
@@ -142,12 +87,12 @@ function Home() {
           <Reveal delay={100}>
             <h1 className="display mt-6 text-[clamp(3.2rem,10vw,9.5rem)]">Dalla pelle<br />al prodotto <span className="text-tan">finito.</span></h1>
           </Reveal>
-          <Reveal delay={200} className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+          <Reveal delay={200} className="mt-10 flex flex-col gap-10 xl:flex-row xl:items-end xl:justify-between">
             <p className="max-w-xl text-lg font-medium text-ink-foreground [text-shadow:0_1px_14px_rgb(28_24_20/0.85)] md:text-xl">
               Manifattura di cinture e piccola pelletteria per brand del lusso e della moda. Prototipi, produzione e materiali — sotto un unico tetto, in totale riservatezza.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Cta href="#parliamo" tone="dark">Parliamo del tuo progetto</Cta>
+              <Cta to="/contatti" tone="dark">Parliamo del tuo progetto</Cta>
               <Cta to="/produzione" tone="dark" variant="outline">Scopri come lavoriamo</Cta>
             </div>
           </Reveal>
@@ -206,7 +151,7 @@ function Home() {
           <div className="mt-16 divide-y divide-ink-foreground/15 border-y border-ink-foreground/15">
             {services.map((s, i) => (
               <Reveal key={s.t} delay={i * 80}>
-                <Link to={s.to} className="group grid gap-4 py-10 transition-colors hover:bg-ink-foreground/[0.04] md:grid-cols-12 md:items-center md:px-4">
+                <Link to={s.to} {...("hash" in s ? { hash: s.hash } : {})} className="group grid gap-4 py-10 transition-colors hover:bg-ink-foreground/[0.04] md:grid-cols-12 md:items-center md:px-4">
                   <h3 className="display text-3xl transition-colors group-hover:text-tan md:col-span-5 md:text-5xl">{s.t}</h3>
                   <p className="text-ink-foreground/65 md:col-span-6">{s.d}</p>
                   <span className="hidden h-12 w-12 items-center justify-center justify-self-end rounded-full border border-ink-foreground/40 text-ink-foreground transition group-hover:border-tan group-hover:bg-tan group-hover:text-ink md:col-span-1 md:flex">
@@ -218,7 +163,7 @@ function Home() {
           </div>
           <Reveal className="mt-16 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <p className="display text-2xl md:text-3xl">Non sai da dove iniziare? Parliamone insieme.</p>
-            <Cta href="#parliamo" tone="dark">Parliamo</Cta>
+            <Cta to="/contatti" tone="dark">Parliamo</Cta>
           </Reveal>
         </div>
       </section>
@@ -250,7 +195,7 @@ function Home() {
           </div>
           <Reveal className="mt-14 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <p className="display text-2xl md:text-3xl">Hai un modello in mente? Partiamo dal tuo.</p>
-            <Cta href="#parliamo">Parliamo del tuo modello</Cta>
+            <Cta to="/contatti">Parliamo del tuo modello</Cta>
           </Reveal>
         </div>
       </section>
@@ -277,34 +222,16 @@ function Home() {
       </section>
 
       {/* 7 · Contatti — chiaro */}
-      <section id="parliamo" data-nav="light" data-hide-cta className="scroll-mt-16">
+      <section data-nav="light" data-hide-cta>
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
           <Reveal><h2 className="display text-[clamp(4rem,14vw,12rem)]">Parliamo<span className="text-leather">.</span></h2></Reveal>
-          <Reveal delay={80} className="mt-10 border-t border-border pt-10">
-            <p className="text-lg text-muted-foreground md:max-w-xl">Raccontaci il tuo progetto: prodotto, volumi, tempi. Rispondiamo entro due giorni lavorativi, con riservatezza.</p>
+          <Reveal delay={120} className="mt-10 flex flex-col gap-10 border-t border-border pt-10 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-xl text-lg text-muted-foreground md:text-xl">Raccontaci il tuo progetto: prodotto, volumi, tempi. Rispondiamo entro due giorni lavorativi, con riservatezza.</p>
+            <div className="flex flex-col gap-5 md:items-end">
+              <Cta to="/contatti">Parliamo del tuo progetto</Cta>
+              <a href="mailto:info@sigillosrl.com" className="text-lg font-medium underline-offset-4 hover:text-leather hover:underline">info@sigillosrl.com</a>
+            </div>
           </Reveal>
-          <div className="mt-14 grid gap-16 md:grid-cols-12">
-            <Reveal delay={120} className="md:col-span-7">
-              <ContactForm />
-            </Reveal>
-            <Reveal delay={200} className="md:col-span-4 md:col-start-9">
-              <div className="space-y-8 bg-linen-deep p-8 md:p-10">
-                <div>
-                  <p className="eyebrow text-leather">Email</p>
-                  <a href="mailto:info@sigillosrl.com" className="mt-3 block text-xl font-medium hover:text-leather">info@sigillosrl.com</a>
-                </div>
-                <div>
-                  <p className="eyebrow text-leather">Sede</p>
-                  <p className="mt-3">Sigillo Srl<br />Scandicci (FI), Italia</p>
-                </div>
-                <div>
-                  <p className="eyebrow text-leather">Mercati</p>
-                  <p className="mt-3">Europa · USA · Australia</p>
-                </div>
-                <p className="border-t border-border pt-6 text-sm text-muted-foreground">Nessun nome e nessun logo sui nostri canali — solo il prodotto che porta il tuo.</p>
-              </div>
-            </Reveal>
-          </div>
         </div>
       </section>
     </Layout>

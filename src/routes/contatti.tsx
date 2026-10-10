@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
-import { Check } from "lucide-react";
-import { Layout, PageHeader } from "@/components/site/Layout";
+import { useState, type FormEvent, type ReactNode } from "react";
+import { Check, Clock, Globe, Mail, MapPin } from "lucide-react";
+import { Layout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowDot, ctaClasses } from "@/components/site/Cta";
 
@@ -17,7 +17,26 @@ export const Route = createFileRoute("/contatti")({
   component: Page,
 });
 
-const field = "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-lg outline-none transition placeholder:text-muted-foreground/60 focus:border-ink";
+const field =
+  "mt-2 w-full rounded-xl border border-border bg-linen/70 px-4 py-3 text-base outline-none transition placeholder:text-muted-foreground/60 focus:border-ink focus:bg-white";
+
+const next = [
+  ["Ci racconti il progetto", "Prodotto, volumi, tempi: anche solo un'idea o un riferimento."],
+  ["Ti rispondiamo", "Entro due giorni lavorativi, con un referente dedicato."],
+  ["Definiamo il passo successivo", "Una call, una visita in showroom o la campionatura."],
+] as const;
+
+function Row({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) {
+  return (
+    <div className="flex items-start gap-4">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-linen-deep text-ink">{icon}</span>
+      <div>
+        <p className="eyebrow text-muted-foreground">{label}</p>
+        <div className="mt-1 text-base">{children}</div>
+      </div>
+    </div>
+  );
+}
 
 function Page() {
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
@@ -26,52 +45,106 @@ function Page() {
     setState("sending");
     setTimeout(() => setState("done"), 800);
   };
+  const c = ctaClasses("solid", "light");
 
   return (
     <Layout>
-      <PageHeader eyebrow="Contatti" title={<>Parliamo<span className="text-leather">.</span></>}
-        intro="Raccontaci prodotto, volumi e tempi. Rispondiamo entro due giorni lavorativi, in totale riservatezza." />
-      <section data-nav="light" className="mx-auto grid max-w-7xl gap-16 px-6 pb-28 md:grid-cols-12 md:px-10 md:pb-36">
-        <Reveal className="md:col-span-7">
-          {state === "done" ? (
-            <div className="border-t-2 border-ink pt-10">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-ink-foreground"><Check className="h-6 w-6" /></span>
-              <h2 className="display mt-8 text-4xl md:text-5xl">Grazie, messaggio ricevuto.</h2>
-              <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
-            </div>
-          ) : (
-            <form onSubmit={submit} className="grid gap-8">
-              <div className="grid gap-8 sm:grid-cols-2">
-                <label className="block"><span className="eyebrow text-muted-foreground">Nome *</span><input required name="nome" className={field} /></label>
-                <label className="block"><span className="eyebrow text-muted-foreground">Email *</span><input required type="email" name="email" className={field} /></label>
+      {/* Intestazione — scura, centrata */}
+      <section data-nav="dark" className="bg-ink text-center text-ink-foreground">
+        <div className="mx-auto max-w-4xl px-6 pb-20 pt-36 md:pb-28 md:pt-44">
+          <p className="eyebrow reveal is-visible inline-flex items-center gap-4 text-tan">
+            <span className="h-px w-10 bg-current" />Contatti<span className="h-px w-10 bg-current" />
+          </p>
+          <h1 className="display reveal is-visible mt-8 text-5xl sm:text-6xl md:text-8xl">
+            Parliamo del <span className="text-tan">tuo progetto.</span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-xl text-lg text-ink-foreground/70 md:text-xl">
+            Scrivici o compila il form: rispondiamo entro due giorni lavorativi, in totale riservatezza.
+          </p>
+        </div>
+      </section>
+
+      {/* Contatti + form — chiaro */}
+      <section data-nav="light">
+        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-12 md:px-10 md:py-24">
+          <Reveal className="md:col-span-5">
+            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-10">
+              <h2 className="display text-3xl text-leather md:text-4xl">Resta in contatto</h2>
+              <div className="mt-10 space-y-8">
+                <Row icon={<Mail className="h-5 w-5" />} label="Email">
+                  <a href="mailto:info@sigillosrl.com" className="font-medium underline-offset-4 hover:text-leather hover:underline">info@sigillosrl.com</a>
+                </Row>
+                <Row icon={<MapPin className="h-5 w-5" />} label="Sede">
+                  Sigillo Srl<br />Scandicci (FI), Italia
+                </Row>
+                <Row icon={<Globe className="h-5 w-5" />} label="Mercati">Europa · USA · Australia</Row>
+                <Row icon={<Clock className="h-5 w-5" />} label="Tempi di risposta">Entro due giorni lavorativi</Row>
               </div>
-              <label className="block"><span className="eyebrow text-muted-foreground">Azienda (opzionale)</span><input name="azienda" className={field} /></label>
-              <label className="block"><span className="eyebrow text-muted-foreground">Tipo di richiesta *</span>
-                <select required name="tipo" defaultValue="" className={field}>
-                  <option value="" disabled>Seleziona</option>
-                  <option>Prototipia</option>
-                  <option>Private Label</option>
-                  <option>Conto Terzi</option>
-                  <option>Piccole Serie</option>
-                  <option>Altro</option>
-                </select>
-              </label>
-              <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={5} className={`${field} resize-none`} /></label>
-              <button disabled={state === "sending"} className={`${ctaClasses("solid", "light").box} disabled:opacity-60`}>
-                <span>{state === "sending" ? "Invio in corso…" : "Invia richiesta"}</span>
-                <ArrowDot className={ctaClasses("solid", "light").dot} />
-              </button>
-            </form>
-          )}
-        </Reveal>
-        <Reveal delay={120} className="md:col-span-4 md:col-start-9">
-          <div className="space-y-10 bg-linen-deep p-8 md:p-10">
-            <div><p className="eyebrow text-leather">Email</p><a href="mailto:info@sigillosrl.com" className="mt-3 block text-xl font-medium hover:text-leather">info@sigillosrl.com</a></div>
-            <div><p className="eyebrow text-leather">Sede</p><p className="mt-3">Sigillo Srl<br />Scandicci (FI), Italia</p></div>
-            <div><p className="eyebrow text-leather">Mercati</p><p className="mt-3">Europa · USA · Australia</p></div>
-            <p className="border-t border-border pt-6 text-sm text-muted-foreground">Nessun nome e nessun logo sui nostri canali — solo il prodotto che porta il tuo.</p>
+              <p className="mt-10 border-t border-border pt-6 text-sm text-muted-foreground">
+                Nessun nome e nessun logo sui nostri canali — solo il prodotto che porta il tuo.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="md:col-span-7">
+            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-10">
+              {state === "done" ? (
+                <div className="flex h-full flex-col justify-center py-10">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-ink-foreground"><Check className="h-6 w-6" /></span>
+                  <h2 className="display mt-8 text-4xl md:text-5xl">Grazie, messaggio ricevuto.</h2>
+                  <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
+                </div>
+              ) : (
+                <>
+                  <h2 className="display text-3xl text-leather md:text-4xl">Scrivici</h2>
+                  <p className="mt-3 text-muted-foreground">Compila il form e ti ricontattiamo con il prossimo passo.</p>
+                  <form onSubmit={submit} className="mt-8 grid gap-5">
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <label className="block"><span className="eyebrow text-muted-foreground">Nome *</span><input required name="nome" autoComplete="name" className={field} /></label>
+                      <label className="block"><span className="eyebrow text-muted-foreground">Email *</span><input required type="email" name="email" autoComplete="email" className={field} /></label>
+                    </div>
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      <label className="block"><span className="eyebrow text-muted-foreground">Azienda (opzionale)</span><input name="azienda" autoComplete="organization" className={field} /></label>
+                      <label className="block">
+                        <span className="eyebrow text-muted-foreground">Tipo di richiesta *</span>
+                        <select required name="tipo" defaultValue="" className={field}>
+                          <option value="" disabled>Seleziona</option>
+                          <option>Prototipia</option>
+                          <option>Private Label</option>
+                          <option>Conto Terzi</option>
+                          <option>Piccole Serie</option>
+                          <option>Altro</option>
+                        </select>
+                      </label>
+                    </div>
+                    <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={6} placeholder="Raccontaci il tuo progetto: prodotto, volumi, tempi…" className={`${field} resize-none`} /></label>
+                    <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
+                      <button disabled={state === "sending"} className={`${c.box} disabled:opacity-60`}>
+                        <span>{state === "sending" ? "Invio in corso…" : "Invia messaggio"}</span>
+                        <ArrowDot className={c.dot} />
+                      </button>
+                      <p className="text-sm text-muted-foreground">Rispondiamo entro due giorni lavorativi. Nessun impegno.</p>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Cosa succede dopo */}
+        <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+          <Reveal><p className="eyebrow eyebrow-line text-leather">Cosa succede dopo</p></Reveal>
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {next.map(([t, d], i) => (
+              <Reveal key={t} delay={i * 100} className="border-t border-ink pt-6">
+                <p className="display text-5xl text-leather">0{i + 1}</p>
+                <h3 className="display mt-4 text-2xl">{t}</h3>
+                <p className="mt-3 text-muted-foreground">{d}</p>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+        </div>
       </section>
     </Layout>
   );
