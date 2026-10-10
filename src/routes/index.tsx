@@ -4,7 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Cta, ArrowDot, ctaClasses } from "@/components/site/Cta";
-import hero from "@/assets/hero.jpg";
+import hero from "@/assets/hero-macchina.jpg";
 import lab from "@/assets/lab.jpg";
 import materials from "@/assets/materials.jpg";
 import classica from "@/assets/cintura-classica.jpg";
@@ -132,16 +132,18 @@ function Home() {
     <Layout>
       {/* 1 · Hero + numeri — scuro, con foto di sfondo e overlay */}
       <section data-nav="dark" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-ink-foreground">
-        <img src={hero} alt="Artigiano che cuce a mano una cintura in pelle" width={1600} height={1072} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <img src={hero} alt="Artigiano che guida un pezzo di pelle sotto una macchina da cucire industriale" width={2000} height={1333} fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover [filter:sepia(0.3)_saturate(1.1)_contrast(1.05)]" />
+        {/* filtro caldo: porta la foto sui toni cuoio del sito */}
+        <div aria-hidden="true" className="absolute inset-0 -z-20 bg-leather mix-blend-color opacity-70" />
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/55 to-ink/90" />
 
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pb-16 pt-32 md:px-10 md:pb-20 md:pt-40">
-          <Reveal><p className="eyebrow eyebrow-line text-tan">Scandicci, Firenze · dal 1988</p></Reveal>
+          <Reveal><p className="eyebrow eyebrow-line text-tan [text-shadow:0_1px_10px_rgb(28_24_20/0.9)]">Scandicci, Firenze · dal 1988</p></Reveal>
           <Reveal delay={100}>
             <h1 className="display mt-6 text-[clamp(3.2rem,10vw,9.5rem)]">Dalla pelle<br />al prodotto <span className="text-tan">finito.</span></h1>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-lg text-ink-foreground/80 md:text-xl">
+            <p className="max-w-xl text-lg font-medium text-ink-foreground [text-shadow:0_1px_14px_rgb(28_24_20/0.85)] md:text-xl">
               Manifattura di cinture e piccola pelletteria per brand del lusso e della moda. Prototipi, produzione e materiali — sotto un unico tetto, in totale riservatezza.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
