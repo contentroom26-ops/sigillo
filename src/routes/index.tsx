@@ -130,51 +130,49 @@ function ContactForm() {
 function Home() {
   return (
     <Layout>
-      {/* 1 · Hero — chiaro */}
-      <div data-nav="light">
-        <section className="mx-auto max-w-7xl px-6 pt-32 md:px-10 md:pt-44">
-          <Reveal><p className="eyebrow eyebrow-line text-leather">Scandicci, Firenze · dal 1988</p></Reveal>
+      {/* 1 · Hero + numeri — scuro, con foto di sfondo e overlay */}
+      <section data-nav="dark" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-ink-foreground">
+        <img src={hero} alt="Artigiano che cuce a mano una cintura in pelle" width={1600} height={1072} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/55 to-ink/90" />
+
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pb-16 pt-32 md:px-10 md:pb-20 md:pt-40">
+          <Reveal><p className="eyebrow eyebrow-line text-tan">Scandicci, Firenze · dal 1988</p></Reveal>
           <Reveal delay={100}>
-            <h1 className="display mt-6 text-[clamp(3.2rem,10vw,9.5rem)]">Dalla pelle<br />al prodotto <span className="text-leather">finito.</span></h1>
+            <h1 className="display mt-6 text-[clamp(3.2rem,10vw,9.5rem)]">Dalla pelle<br />al prodotto <span className="text-tan">finito.</span></h1>
           </Reveal>
           <Reveal delay={200} className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
+            <p className="max-w-xl text-lg text-ink-foreground/80 md:text-xl">
               Manifattura di cinture e piccola pelletteria per brand del lusso e della moda. Prototipi, produzione e materiali — sotto un unico tetto, in totale riservatezza.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Cta href="#parliamo">Parliamo del tuo progetto</Cta>
-              <Cta to="/produzione" variant="outline">Scopri come lavoriamo</Cta>
+              <Cta href="#parliamo" tone="dark">Parliamo del tuo progetto</Cta>
+              <Cta to="/produzione" tone="dark" variant="outline">Scopri come lavoriamo</Cta>
             </div>
           </Reveal>
-        </section>
-        <Reveal className="mx-auto mt-16 max-w-7xl px-6 pb-24 md:mt-24 md:px-10 md:pb-32">
-          <img src={hero} alt="Artigiano che cuce a mano una cintura in pelle" width={1600} height={1072} className="aspect-[16/9] w-full rounded-sm object-cover md:aspect-[21/9]" />
-        </Reveal>
-      </div>
-
-      {/* 2 · Numeri — scuro */}
-      <section data-nav="dark" className="bg-ink text-ink-foreground">
-        <div className="overflow-hidden border-b border-ink-foreground/10 py-5" aria-hidden="true">
-          <div className="marquee-track">
-            {[...ticker, ...ticker].map((w, i) => (
-              <span key={i} className="eyebrow flex items-center gap-8 pr-8 text-ink-foreground/70">
-                {w}<span className="h-1 w-1 rounded-full bg-tan" />
-              </span>
-            ))}
-          </div>
         </div>
-        <div className="mx-auto grid max-w-7xl grid-cols-1 px-6 py-20 sm:grid-cols-3 md:px-10 md:py-28">
+
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 px-6 sm:grid-cols-3 md:px-10">
           {[
             [<Counter key="a" to={40} />, "anni di manifattura", "Dal 1988 nel distretto di Scandicci."],
             [<Counter key="b" to={30} suffix="+" />, "maison servite", "Brand del lusso e della moda, in riservatezza."],
             ["Globale", "presenza", "Europa, USA, Australia."],
-          ].map(([v, l, s], i) => (
-            <Reveal key={String(l)} delay={i * 120} className="border-t border-ink-foreground/20 py-8 sm:pr-8">
-              <p className="display text-6xl md:text-8xl">{v}</p>
-              <p className="eyebrow mt-4 text-tan">{l}</p>
-              <p className="mt-2 text-sm text-ink-foreground/60">{s}</p>
+          ].map(([v, l, d], i) => (
+            <Reveal key={String(l)} delay={300 + i * 120} className="border-t border-ink-foreground/25 py-6 sm:pr-8">
+              <p className="display text-5xl md:text-7xl">{v}</p>
+              <p className="eyebrow mt-3 text-tan">{l}</p>
+              <p className="mt-1 text-sm text-ink-foreground/65">{d}</p>
             </Reveal>
           ))}
+        </div>
+
+        <div className="overflow-hidden border-t border-ink-foreground/15 bg-ink/60 py-5 backdrop-blur-sm" aria-hidden="true">
+          <div className="marquee-track">
+            {[...ticker, ...ticker].map((w, i) => (
+              <span key={i} className="eyebrow flex items-center gap-8 pr-8 text-ink-foreground/75">
+                {w}<span className="h-1 w-1 rounded-full bg-tan" />
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
