@@ -95,3 +95,35 @@
   transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
   &.is-visible { opacity: 1; transform: none; }
 }
+
+/* Eyebrow con linea iniziale (stile editoriale) */
+@utility eyebrow-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  &::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+/* Striscia scorrevole (marquee) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  &:hover { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { animation: none; }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
