@@ -6,6 +6,12 @@ import { Reveal } from "@/components/site/Reveal";
 import hero from "@/assets/hero.jpg";
 import lab from "@/assets/lab.jpg";
 import materials from "@/assets/materials.jpg";
+import classica from "@/assets/cintura-classica.jpg";
+import elegante from "@/assets/cintura-elegante.jpg";
+import intrecciata from "@/assets/cintura-intrecciata.jpg";
+import casual from "@/assets/cintura-casual.jpg";
+import bufalo from "@/assets/cintura-bufalo.jpg";
+import design from "@/assets/cintura-design.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,6 +29,15 @@ const services = [
   { t: "Prototipia", d: "Dal brief al campione approvato. Sviluppiamo cartamodelli, scegliamo pellami e accessori, costruiamo il prototipo fino alla versione definitiva.", to: "/prototipia" },
   { t: "Produzione", d: "Private label, conto terzi o piccole serie. Una filiera interna che garantisce costanza, tempi chiari e controllo su ogni pezzo.", to: "/produzione" },
   { t: "Materiali", d: "Accesso diretto alle concerie e ai fornitori di accessori del distretto toscano. Selezioniamo con te pellami, finiture e fibbie.", to: "/prototipia" },
+] as const;
+
+const collection = [
+  { src: classica, t: "Classica", alt: "Cintura classica in cuoio con fibbia nichel" },
+  { src: elegante, t: "Elegante", alt: "Cintura elegante in pelle marrone liscia" },
+  { src: intrecciata, t: "Intrecciata", alt: "Cintura intrecciata a mano in pelle marrone" },
+  { src: casual, t: "Casual", alt: "Cintura casual in pelle blu" },
+  { src: bufalo, t: "Bufalo", alt: "Cintura in pelle di bufalo martellata" },
+  { src: design, t: "Di design", alt: "Cintura alta in pelle stampata coccodrillo" },
 ] as const;
 
 const modes = [
@@ -154,6 +169,29 @@ function Home() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Collezione */}
+      <section className="bg-linen-deep">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+          <Reveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="eyebrow text-leather">Campionario</p>
+              <h2 className="display mt-6 text-4xl md:text-6xl">Cinture, in ogni forma.</h2>
+            </div>
+            <p className="max-w-md text-muted-foreground">Alcuni modelli del nostro campionario in showroom: il punto di partenza per costruire il prodotto giusto per il tuo brand.</p>
+          </Reveal>
+          <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+            {collection.map((c, i) => (
+              <Reveal key={c.t} delay={(i % 3) * 100}>
+                <figure>
+                  <img src={c.src} alt={c.alt} loading="lazy" width={1200} height={1092} className="aspect-square w-full rounded-sm object-cover" />
+                  <figcaption className="eyebrow mt-3 text-muted-foreground">{c.t}</figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
