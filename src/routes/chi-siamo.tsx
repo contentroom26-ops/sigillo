@@ -27,7 +27,7 @@ function Page() {
     <Layout>
       <PageHeader eyebrow="Chi siamo" title={<>Una manifattura, <span className="text-leather">un mestiere.</span></>}
         intro="Dal 1988 costruiamo cinture per i marchi che le firmano. Lontano dai riflettori, vicino al prodotto." />
-      <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 md:grid-cols-12 md:px-10 md:pb-32">
+      <section data-nav="light" className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 md:grid-cols-12 md:px-10 md:pb-32">
         <Reveal className="md:col-span-7"><img src={lab} alt="Il laboratorio Sigillo" width={1408} height={1008} className="aspect-[4/3] w-full rounded-sm object-cover" /></Reveal>
         <Reveal delay={120} className="md:col-span-5 md:self-end">
           <p className="text-lg text-muted-foreground">
@@ -40,7 +40,7 @@ function Page() {
       </section>
       <section data-nav="dark" className="bg-ink text-ink-foreground">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-          <Reveal><p className="eyebrow text-tan">Perché Sigillo</p></Reveal>
+          <Reveal><p className="eyebrow eyebrow-line text-tan">Perché Sigillo</p></Reveal>
           <div className="mt-12 grid gap-12 md:grid-cols-3">
             {pillars.map(([t, d], i) => (
               <Reveal key={t} delay={i * 100} className="border-t border-tan/40 pt-8">
@@ -51,7 +51,7 @@ function Page() {
           </div>
         </div>
       </section>
-      <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 md:grid-cols-2 md:px-10 md:py-32">
+      <section data-nav="light" className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 md:grid-cols-2 md:px-10 md:py-32">
         <Reveal className="divide-y divide-border border-y border-border">
           {[["Sede", "Scandicci (FI)"], ["Fondazione", "1988"], ["Mercati", "Europa · USA · Australia"], ["Specializzazione", "Cinture e piccola pelletteria"]].map(([k, v]) => (
             <div key={k} className="flex items-baseline justify-between gap-6 py-6">

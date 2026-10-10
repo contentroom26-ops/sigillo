@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Layout, PageHeader } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
+import { ArrowDot, ctaClasses } from "@/components/site/Cta";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/contatti")({
   component: Page,
 });
 
-const field = "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-lg outline-none transition placeholder:text-muted-foreground/60 focus:border-leather";
+const field = "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-lg outline-none transition placeholder:text-muted-foreground/60 focus:border-ink";
 
 function Page() {
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
@@ -30,11 +31,11 @@ function Page() {
     <Layout>
       <PageHeader eyebrow="Contatti" title={<>Parliamo<span className="text-leather">.</span></>}
         intro="Raccontaci prodotto, volumi e tempi. Rispondiamo entro due giorni lavorativi, in totale riservatezza." />
-      <section className="mx-auto grid max-w-7xl gap-16 px-6 pb-28 md:grid-cols-12 md:px-10 md:pb-36">
+      <section data-nav="light" className="mx-auto grid max-w-7xl gap-16 px-6 pb-28 md:grid-cols-12 md:px-10 md:pb-36">
         <Reveal className="md:col-span-7">
           {state === "done" ? (
-            <div className="border-t-2 border-leather pt-10">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-leather text-primary-foreground"><Check className="h-6 w-6" /></span>
+            <div className="border-t-2 border-ink pt-10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ink text-ink-foreground"><Check className="h-6 w-6" /></span>
               <h2 className="display mt-8 text-4xl md:text-5xl">Grazie, messaggio ricevuto.</h2>
               <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
             </div>
@@ -56,8 +57,9 @@ function Page() {
                 </select>
               </label>
               <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={5} className={`${field} resize-none`} /></label>
-              <button disabled={state === "sending"} className="group inline-flex w-fit items-center gap-3 rounded-sm bg-ink px-8 py-4 text-sm font-medium text-ink-foreground transition hover:bg-leather disabled:opacity-60">
-                {state === "sending" ? "Invio in corso…" : "Invia richiesta"} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              <button disabled={state === "sending"} className={`${ctaClasses("solid", "light").box} disabled:opacity-60`}>
+                <span>{state === "sending" ? "Invio in corso…" : "Invia richiesta"}</span>
+                <ArrowDot className={ctaClasses("solid", "light").dot} />
               </button>
             </form>
           )}
