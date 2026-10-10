@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import hero from "@/assets/hero.jpg";
@@ -19,16 +20,64 @@ export const Route = createFileRoute("/")({
 });
 
 const services = [
-  { n: "01", t: "Prototipia", d: "Dal brief al campione approvato. Sviluppiamo cartamodelli, scegliamo pellami e accessori, costruiamo il prototipo fino alla versione definitiva.", to: "/prototipia" },
-  { n: "02", t: "Produzione", d: "Private label, conto terzi o piccole serie. Una filiera interna che garantisce costanza, tempi chiari e controllo su ogni pezzo.", to: "/produzione" },
-  { n: "03", t: "Materiali", d: "Accesso diretto alle concerie e ai fornitori di accessori del distretto toscano. Selezioniamo con te pellami, finiture e fibbie.", to: "/chi-siamo" },
+  { t: "Prototipia", d: "Dal brief al campione approvato. Sviluppiamo cartamodelli, scegliamo pellami e accessori, costruiamo il prototipo fino alla versione definitiva.", to: "/prototipia" },
+  { t: "Produzione", d: "Private label, conto terzi o piccole serie. Una filiera interna che garantisce costanza, tempi chiari e controllo su ogni pezzo.", to: "/produzione" },
+  { t: "Materiali", d: "Accesso diretto alle concerie e ai fornitori di accessori del distretto toscano. Selezioniamo con te pellami, finiture e fibbie.", to: "/prototipia" },
 ] as const;
 
 const modes = [
   { t: "Private Label", h: "Hai un brand, ti costruiamo il prodotto." },
   { t: "Conto Terzi", h: "Hai il design, noi produciamo." },
-  { t: "Piccole Serie", h: "Hai un’idea, partiamo da lì." },
+  { t: "Piccole Serie", h: "Hai un'idea, partiamo da lì." },
 ];
+
+const field = "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-lg outline-none transition placeholder:text-muted-foreground/60 focus:border-leather";
+
+function ContactForm() {
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    setState("sending");
+    setTimeout(() => setState("done"), 800);
+  };
+
+  if (state === "done") {
+    return (
+      <div className="border-t-2 border-leather pt-10">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-leather text-primary-foreground">
+          <Check className="h-6 w-6" />
+        </span>
+        <h3 className="display mt-8 text-3xl md:text-4xl">Grazie, messaggio ricevuto.</h3>
+        <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="grid gap-8">
+      <div className="grid gap-8 sm:grid-cols-2">
+        <label className="block"><span className="eyebrow text-muted-foreground">Nome *</span><input required name="nome" className={field} /></label>
+        <label className="block"><span className="eyebrow text-muted-foreground">Email *</span><input required type="email" name="email" className={field} /></label>
+      </div>
+      <label className="block"><span className="eyebrow text-muted-foreground">Azienda (opzionale)</span><input name="azienda" className={field} /></label>
+      <label className="block">
+        <span className="eyebrow text-muted-foreground">Tipo di richiesta *</span>
+        <select required name="tipo" defaultValue="" className={field}>
+          <option value="" disabled>Seleziona</option>
+          <option>Prototipia</option>
+          <option>Private Label</option>
+          <option>Conto Terzi</option>
+          <option>Piccole Serie</option>
+          <option>Altro</option>
+        </select>
+      </label>
+      <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={4} className={`${field} resize-none`} /></label>
+      <button disabled={state === "sending"} className="group inline-flex w-fit items-center gap-3 rounded-sm bg-ink px-8 py-4 text-sm font-medium text-ink-foreground transition hover:bg-leather disabled:opacity-60">
+        {state === "sending" ? "Invio in corso…" : "Invia richiesta"} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+      </button>
+    </form>
+  );
+}
 
 function Home() {
   return (
@@ -43,9 +92,14 @@ function Home() {
           <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
             Manifattura di cinture e piccola pelletteria per brand del lusso e della moda. Prototipi, produzione e materiali — sotto un unico tetto, in totale riservatezza.
           </p>
-          <Link to="/contatti" className="group inline-flex w-fit items-center gap-3 rounded-sm bg-ink px-7 py-4 text-sm font-medium text-ink-foreground transition hover:bg-leather">
-            Parliamo del tuo progetto <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href="#parliamo" className="group inline-flex w-fit items-center gap-3 rounded-sm bg-ink px-7 py-4 text-sm font-medium text-ink-foreground transition hover:bg-leather">
+              Parliamo del tuo progetto <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </a>
+            <Link to="/produzione" className="group inline-flex w-fit items-center gap-3 rounded-sm border border-border px-7 py-4 text-sm font-medium transition hover:border-leather hover:text-leather">
+              Scopri come lavoriamo <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </Link>
+          </div>
         </Reveal>
       </section>
       <Reveal className="mx-auto mt-16 max-w-7xl px-6 md:mt-24 md:px-10">
@@ -73,7 +127,7 @@ function Home() {
           <Reveal><img src={lab} alt="Il laboratorio Sigillo a Scandicci" loading="lazy" width={1408} height={1008} className="aspect-[4/5] w-full rounded-sm object-cover" /></Reveal>
           <Reveal delay={120}>
             <p className="eyebrow text-leather">La nostra storia</p>
-            <h2 className="display mt-6 text-4xl md:text-6xl">Quasi quarant’anni a costruire il prodotto degli altri.</h2>
+            <h2 className="display mt-6 text-4xl md:text-6xl">Quasi quarant'anni a costruire il prodotto degli altri.</h2>
             <p className="mt-8 text-lg text-muted-foreground">
               Sigillo nasce nel 1988 a Scandicci, nel cuore della pelletteria fiorentina. Da allora realizziamo cinture e piccola pelletteria per maison e marchi internazionali — con lo stesso metodo: ascolto, precisione, consegna.
             </p>
@@ -94,8 +148,7 @@ function Home() {
           {services.map((s, i) => (
             <Reveal key={s.t} delay={i * 80}>
               <Link to={s.to} className="group grid gap-4 py-10 md:grid-cols-12 md:items-baseline">
-                <span className="text-sm text-muted-foreground md:col-span-1">{s.n}</span>
-                <h3 className="display text-3xl transition group-hover:text-leather md:col-span-4 md:text-5xl">{s.t}</h3>
+                <h3 className="display text-3xl transition group-hover:text-leather md:col-span-5 md:text-5xl">{s.t}</h3>
                 <p className="text-muted-foreground md:col-span-6">{s.d}</p>
                 <ArrowUpRight className="hidden h-6 w-6 justify-self-end text-leather transition group-hover:-translate-y-1 group-hover:translate-x-1 md:col-span-1 md:block" />
               </Link>
@@ -110,7 +163,7 @@ function Home() {
           <Reveal className="md:col-span-5">
             <p className="eyebrow text-tan">Modalità di lavoro</p>
             <h2 className="display mt-6 text-4xl md:text-6xl">Parti da dove sei.</h2>
-            <p className="mt-8 text-ink-foreground/60">Che tu abbia un marchio affermato, un disegno pronto o solo un’idea, troviamo il formato giusto. Piccole serie da 80–100 pezzi.</p>
+            <p className="mt-8 text-ink-foreground/60">Che tu abbia un marchio affermato, un disegno pronto o solo un'idea, troviamo il formato giusto. Piccole serie da 80–100 pezzi.</p>
             <img src={materials} alt="Campioni di pellame e fibbie in ottone" loading="lazy" width={1200} height={1200} className="mt-12 hidden aspect-square w-3/4 rounded-sm object-cover md:block" />
           </Reveal>
           <div className="md:col-span-7">
@@ -126,17 +179,33 @@ function Home() {
       </section>
 
       {/* Contatti */}
-      <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
+      <section id="parliamo" className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
         <Reveal><h2 className="display text-[clamp(4rem,14vw,12rem)]">Parliamo.</h2></Reveal>
-        <Reveal delay={120} className="mt-10 grid gap-10 border-t border-border pt-10 md:grid-cols-3">
-          <p className="text-lg text-muted-foreground md:col-span-2">Raccontaci il tuo progetto: prodotto, volumi, tempi. Rispondiamo entro due giorni lavorativi, con riservatezza.</p>
-          <div className="flex flex-col gap-4">
-            <a href="mailto:info@sigillosrl.com" className="text-xl font-medium hover:text-leather">info@sigillosrl.com</a>
-            <Link to="/contatti" className="group inline-flex w-fit items-center gap-3 rounded-sm bg-leather px-7 py-4 text-sm font-medium text-primary-foreground transition hover:bg-ink">
-              Parliamo del tuo progetto <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </Link>
-          </div>
+        <Reveal delay={80} className="mt-10 border-t border-border pt-10">
+          <p className="text-lg text-muted-foreground md:max-w-xl">Raccontaci il tuo progetto: prodotto, volumi, tempi. Rispondiamo entro due giorni lavorativi, con riservatezza.</p>
         </Reveal>
+        <div className="mt-14 grid gap-16 md:grid-cols-12">
+          <Reveal delay={120} className="md:col-span-7">
+            <ContactForm />
+          </Reveal>
+          <Reveal delay={200} className="md:col-span-4 md:col-start-9">
+            <div className="space-y-8 bg-linen-deep p-8 md:p-10">
+              <div>
+                <p className="eyebrow text-leather">Email</p>
+                <a href="mailto:info@sigillosrl.com" className="mt-3 block text-xl font-medium hover:text-leather">info@sigillosrl.com</a>
+              </div>
+              <div>
+                <p className="eyebrow text-leather">Sede</p>
+                <p className="mt-3">Sigillo Srl<br />Scandicci (FI), Italia</p>
+              </div>
+              <div>
+                <p className="eyebrow text-leather">Mercati</p>
+                <p className="mt-3">Europa · USA · Australia</p>
+              </div>
+              <p className="border-t border-border pt-6 text-sm text-muted-foreground">Nessun nome e nessun logo sui nostri canali — solo il prodotto che porta il tuo.</p>
+            </div>
+          </Reveal>
+        </div>
       </section>
     </Layout>
   );
