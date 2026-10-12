@@ -7,8 +7,8 @@ import marrone from "@/assets/cintura-marrone-scuro.jpg";
 import detMarrone from "@/assets/det-marrone-scuro.jpg";
 import croco from "@/assets/cintura-coccodrillo-nero.jpg";
 import detCroco from "@/assets/det-coccodrillo-nero.jpg";
-import rossa from "@/assets/cintura-rossa.jpg";
-import detRossa from "@/assets/det-rossa.jpg";
+import bufalo from "@/assets/cintura-bufalo.jpg";
+import detBufalo from "@/assets/det-bufalo.jpg";
 
 export const Route = createFileRoute("/produzione")({
   head: () => ({
@@ -45,7 +45,7 @@ const modes = [
     porta: ["Un’idea, uno schizzo o un riferimento", "Budget indicativo", "Disponibilità al confronto"],
     include: ["Consulenza su design e materiali", "Prototipo e campionatura", "Prima produzione", "Supporto per i riassortimenti"],
     vol: "Minimo 80–100 pezzi",
-    img: [rossa, "Cintura sottile in pelle rossa con fibbia argento"], det: [detRossa, "Dettaglio della fibbia di una cintura sottile rossa"],
+    img: [bufalo, "Cintura in pelle bufalo naturale con fibbia argento"], det: [detBufalo, "Dettaglio della grana e del punto di cucitura di una cintura in pelle bufalo"],
   },
 ] as const;
 

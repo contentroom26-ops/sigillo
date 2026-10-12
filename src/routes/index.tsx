@@ -12,6 +12,7 @@ import elegante from "@/assets/cintura-elegante.jpg";
 import intrecciata from "@/assets/cintura-intrecciata.jpg";
 import casual from "@/assets/cintura-casual.jpg";
 import bufalo from "@/assets/cintura-bufalo.jpg";
+import rossa from "@/assets/cintura-rossa.jpg";
 import design from "@/assets/cintura-design.jpg";
 
 export const Route = createFileRoute("/")({
@@ -37,7 +38,7 @@ const models = [
   { src: elegante, t: "Elegante", alt: "Cintura elegante in pelle marrone liscia" },
   { src: intrecciata, t: "Intrecciata", alt: "Cintura intrecciata a mano in pelle marrone" },
   { src: casual, t: "Casual", alt: "Cintura casual in pelle blu" },
-  { src: bufalo, t: "Donna", alt: "Cintura da donna in pelle martellata" },
+  { src: rossa, t: "Donna", alt: "Cintura da donna in pelle rossa con fibbia argento" },
   { src: design, t: "Di design", alt: "Cintura alta in pelle stampata coccodrillo" },
 ] as const;
 
