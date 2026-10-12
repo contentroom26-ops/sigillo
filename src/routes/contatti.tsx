@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contatti")({
 });
 
 const field =
-  "mt-2 w-full rounded-xl border border-border bg-linen/70 px-4 py-3 text-base outline-none transition placeholder:text-muted-foreground/60 focus:border-ink focus:bg-white";
+  "mt-1.5 w-full rounded-xl border border-border bg-linen/70 px-4 py-2.5 text-base outline-none transition placeholder:text-muted-foreground/60 focus:border-ink focus:bg-white";
 
 const next = [
   ["Ci racconti il progetto", "Prodotto, volumi, tempi: anche solo un'idea o un riferimento."],
@@ -49,28 +49,28 @@ function Page() {
 
   return (
     <Layout>
-      {/* Intestazione — scura, centrata */}
+      {/* Intestazione — scura, compatta: il form resta visibile subito */}
       <section data-nav="dark" className="bg-ink text-center text-ink-foreground">
-        <div className="mx-auto max-w-4xl px-6 pb-20 pt-36 md:pb-28 md:pt-44">
+        <div className="mx-auto max-w-4xl px-6 pb-12 pt-28 md:pb-14 md:pt-32">
           <p className="eyebrow reveal is-visible inline-flex items-center gap-4 text-tan">
             <span className="h-px w-10 bg-current" />Contatti<span className="h-px w-10 bg-current" />
           </p>
-          <h1 className="display reveal is-visible mt-8 text-5xl sm:text-6xl md:text-8xl">
+          <h1 className="display reveal is-visible mt-5 text-4xl sm:text-5xl md:text-6xl">
             Parliamo del <span className="text-tan">tuo progetto.</span>
           </h1>
-          <p className="mx-auto mt-8 max-w-xl text-lg text-ink-foreground/70 md:text-xl">
-            Scrivici o compila il form: rispondiamo entro due giorni lavorativi, in totale riservatezza.
+          <p className="mx-auto mt-5 max-w-xl text-base text-ink-foreground/70 md:text-lg">
+            Scrivici, chiama o compila il form: rispondiamo entro due giorni lavorativi, in totale riservatezza.
           </p>
         </div>
       </section>
 
       {/* Contatti + form — chiaro */}
       <section data-nav="light">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-12 md:px-10 md:py-24">
-          <Reveal className="md:col-span-5">
-            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-10">
+        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 md:grid-cols-12 md:px-10 md:py-12">
+          <Reveal className="order-2 md:order-1 md:col-span-5">
+            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-9">
               <h2 className="display text-3xl text-leather md:text-4xl">Resta in contatto</h2>
-              <div className="mt-10 space-y-8">
+              <div className="mt-8 space-y-6">
                 <Row icon={<Mail className="h-5 w-5" />} label="Email">
                   <a href="mailto:info@sigillosrl.com" className="font-medium underline-offset-4 hover:text-leather hover:underline">info@sigillosrl.com</a>
                 </Row>
@@ -90,8 +90,8 @@ function Page() {
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="md:col-span-7">
-            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-10">
+          <Reveal delay={120} className="order-1 md:order-2 md:col-span-7">
+            <div className="h-full rounded-2xl border border-border bg-white/60 p-8 md:p-9">
               {state === "done" ? (
                 <div className="flex h-full flex-col justify-center py-10">
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-ink-foreground"><Check className="h-6 w-6" /></span>
@@ -102,12 +102,12 @@ function Page() {
                 <>
                   <h2 className="display text-3xl text-leather md:text-4xl">Scrivici</h2>
                   <p className="mt-3 text-muted-foreground">Compila il form e ti ricontattiamo con il prossimo passo.</p>
-                  <form onSubmit={submit} className="mt-8 grid gap-5">
-                    <div className="grid gap-5 sm:grid-cols-2">
+                  <form onSubmit={submit} className="mt-6 grid gap-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
                       <label className="block"><span className="eyebrow text-muted-foreground">Nome *</span><input required name="nome" autoComplete="name" className={field} /></label>
                       <label className="block"><span className="eyebrow text-muted-foreground">Email *</span><input required type="email" name="email" autoComplete="email" className={field} /></label>
                     </div>
-                    <div className="grid gap-5 sm:grid-cols-2">
+                    <div className="grid gap-4 sm:grid-cols-2">
                       <label className="block"><span className="eyebrow text-muted-foreground">Azienda (opzionale)</span><input name="azienda" autoComplete="organization" className={field} /></label>
                       <label className="block">
                         <span className="eyebrow text-muted-foreground">Tipo di richiesta *</span>
@@ -121,7 +121,7 @@ function Page() {
                         </select>
                       </label>
                     </div>
-                    <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={6} placeholder="Raccontaci il tuo progetto: prodotto, volumi, tempi…" className={`${field} resize-none`} /></label>
+                    <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={5} placeholder="Raccontaci il tuo progetto: prodotto, volumi, tempi…" className={`${field} resize-none`} /></label>
                     <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
                       <button disabled={state === "sending"} className={`${c.box} disabled:opacity-60`}>
                         <span>{state === "sending" ? "Invio in corso…" : "Invia messaggio"}</span>
@@ -137,7 +137,7 @@ function Page() {
         </div>
 
         {/* Cosa succede dopo */}
-        <div className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
+        <div className="mx-auto max-w-7xl px-6 pb-20 pt-6 md:px-10 md:pb-28">
           <Reveal><p className="eyebrow eyebrow-line text-leather">Cosa succede dopo</p></Reveal>
           <div className="mt-8 grid gap-8 md:grid-cols-3">
             {next.map(([t, d], i) => (

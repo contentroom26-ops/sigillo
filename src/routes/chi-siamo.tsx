@@ -3,9 +3,9 @@ import { Layout, PageHero, CtaBand } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Cta } from "@/components/site/Cta";
 import lab from "@/assets/lab.jpg";
-import elegante from "@/assets/cintura-elegante.jpg";
-import intrecciata from "@/assets/cintura-intrecciata.jpg";
-import detLarga from "@/assets/det-larga.jpg";
+import arancio from "@/assets/cintura-arancio-larga.jpg";
+import intrecciataNera from "@/assets/cintura-intrecciata-nera.jpg";
+import detBlu from "@/assets/det-blu.jpg";
 
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
@@ -51,8 +51,8 @@ function Page() {
             <div className="mt-10"><Cta to="/produzione" variant="outline">Come lavoriamo</Cta></div>
           </Reveal>
           <Reveal delay={120} className="grid grid-cols-2 gap-4 md:col-span-6">
-            <img src={elegante} alt="Cintura elegante in pelle marrone liscia" loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover" />
-            <img src={intrecciata} alt="Cintura intrecciata a mano in pelle marrone" loading="lazy" className="mt-12 aspect-[4/5] w-full rounded-sm object-cover" />
+            <img src={intrecciataNera} alt="Cintura intrecciata a mano in pelle nera" loading="lazy" className="aspect-square w-full rounded-sm object-cover" />
+            <img src={arancio} alt="Cintura alta in cuoio arancio con doppia fibbia" loading="lazy" className="mt-14 aspect-square w-full rounded-sm object-cover" />
           </Reveal>
         </div>
       </section>
@@ -87,7 +87,7 @@ function Page() {
               </div>
             ))}
           </Reveal>
-          <Reveal delay={120}><img src={detLarga} alt="Dettaglio di una cintura larga in cuoio con doppia fibbia" loading="lazy" className="aspect-square w-full rounded-sm object-cover" /></Reveal>
+          <Reveal delay={120}><img src={detBlu} alt="Dettaglio di una cintura blu con fibbia e cuciture a vista" loading="lazy" className="aspect-[4/3] w-full rounded-sm object-cover" /></Reveal>
         </div>
       </section>
 

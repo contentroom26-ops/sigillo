@@ -3,12 +3,12 @@ import { Layout, PageHero, CtaBand } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Cta } from "@/components/site/Cta";
 import hero from "@/assets/hero.jpg";
-import elegante from "@/assets/cintura-elegante.jpg";
-import detElegante from "@/assets/det-elegante.jpg";
-import classica from "@/assets/cintura-classica.jpg";
-import detClassica from "@/assets/det-classica.jpg";
-import intrecciata from "@/assets/cintura-intrecciata.jpg";
-import detCoccodrillo from "@/assets/det-coccodrillo.jpg";
+import marrone from "@/assets/cintura-marrone-scuro.jpg";
+import detMarrone from "@/assets/det-marrone-scuro.jpg";
+import croco from "@/assets/cintura-coccodrillo-nero.jpg";
+import detCroco from "@/assets/det-coccodrillo-nero.jpg";
+import rossa from "@/assets/cintura-rossa.jpg";
+import detRossa from "@/assets/det-rossa.jpg";
 
 export const Route = createFileRoute("/produzione")({
   head: () => ({
@@ -29,7 +29,7 @@ const modes = [
     porta: ["Brand book o riferimenti visivi", "Target e fascia di prezzo", "Tempistiche di lancio"],
     include: ["Sviluppo modelli e cartamodelli", "Selezione pellami e accessori", "Personalizzazione con il tuo logo", "Confezionamento"],
     vol: "Da 100 pezzi per modello",
-    img: [elegante, "Cintura elegante in pelle marrone liscia"], det: [detElegante, "Dettaglio della fibbia di una cintura elegante"],
+    img: [marrone, "Cintura larga in pelle marrone scuro con fibbia nichel"], det: [detMarrone, "Dettaglio della fibbia e del passante di una cintura marrone scuro"],
   },
   {
     t: "Conto Terzi", h: "Hai il design, noi produciamo.",
@@ -37,7 +37,7 @@ const modes = [
     porta: ["Scheda tecnica o campione", "Materiali forniti o da reperire", "Volumi e calendario consegne"],
     include: ["Industrializzazione del modello", "Taglio, preparazione, cucitura, rifinitura", "Controllo qualità pezzo per pezzo", "Report di avanzamento"],
     vol: "Da piccoli lotti a produzioni continuative",
-    img: [classica, "Cintura classica in cuoio con fibbia nichel"], det: [detClassica, "Dettaglio di cucitura e fibbia di una cintura classica"],
+    img: [croco, "Cintura nera in pelle stampata effetto coccodrillo"], det: [detCroco, "Dettaglio della fibbia di una cintura nera stampata coccodrillo"],
   },
   {
     t: "Piccole Serie", h: "Hai un’idea, partiamo da lì.",
@@ -45,7 +45,7 @@ const modes = [
     porta: ["Un’idea, uno schizzo o un riferimento", "Budget indicativo", "Disponibilità al confronto"],
     include: ["Consulenza su design e materiali", "Prototipo e campionatura", "Prima produzione", "Supporto per i riassortimenti"],
     vol: "Minimo 80–100 pezzi",
-    img: [intrecciata, "Cintura intrecciata a mano in pelle marrone"], det: [detCoccodrillo, "Dettaglio di pelle stampata effetto coccodrillo"],
+    img: [rossa, "Cintura sottile in pelle rossa con fibbia argento"], det: [detRossa, "Dettaglio della fibbia di una cintura sottile rossa"],
   },
 ] as const;
 
@@ -84,9 +84,14 @@ function Page() {
                   <p className={`mt-8 inline-block rounded-full px-5 py-2 text-sm font-medium ${dark ? "bg-linen text-ink" : "bg-ink text-ink-foreground"}`}>{m.vol}</p>
                   <div className="mt-8"><Cta to="/contatti" tone={dark ? "dark" : "light"} variant="outline">Parliamo di {m.t}</Cta></div>
                 </Reveal>
-                <Reveal delay={120} className={`grid grid-cols-5 items-end gap-4 md:col-span-6 md:row-start-1 ${dark ? "md:col-start-1" : "md:col-start-7"}`}>
-                  <img src={m.img[0]} alt={m.img[1]} loading="lazy" className="col-span-3 aspect-[4/5] w-full rounded-sm object-cover" />
-                  <img src={m.det[0]} alt={m.det[1]} loading="lazy" className="col-span-2 aspect-square w-full rounded-sm object-cover" />
+                <Reveal delay={120} className={`pb-8 md:col-span-6 md:row-start-1 ${dark ? "md:col-start-1" : "md:col-start-7"}`}>
+                  <div className="relative">
+                    <img src={m.img[0]} alt={m.img[1]} loading="lazy" className="aspect-[11/10] w-full rounded-sm object-cover" />
+                    <img
+                      src={m.det[0]} alt={m.det[1]} loading="lazy"
+                      className={`absolute -bottom-8 w-[38%] aspect-square rounded-sm border-[6px] object-cover shadow-xl md:border-8 ${dark ? "border-ink -right-2 md:-right-6" : "border-linen -left-2 md:-left-6"}`}
+                    />
+                  </div>
                 </Reveal>
               </div>
               <Reveal className={`mt-14 grid gap-10 border-t pt-10 sm:grid-cols-2 ${dark ? "border-ink-foreground/15" : "border-border"}`}>
