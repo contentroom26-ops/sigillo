@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { Layout } from "@/components/site/Layout";
+import { ArrowUpRight, Plus } from "lucide-react";
+import { Layout, CtaBand } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { Cta } from "@/components/site/Cta";
 import hero from "@/assets/hero-macchina.jpg";
@@ -46,6 +46,14 @@ const modes = [
   { t: "Conto Terzi", h: "Hai il design, noi produciamo." },
   { t: "Piccole Serie", h: "Hai un'idea, partiamo da lì." },
 ];
+
+const faqs = [
+  ["Qual è il quantitativo minimo?", "Dipende dalla modalità di lavoro: le piccole serie partono da 80–100 pezzi, il private label da 100 pezzi per modello, il conto terzi va dai piccoli lotti alle produzioni continuative."],
+  ["Posso partire solo da un'idea o da un disegno?", "Sì. Si può partire da un disegno, un campione, una foto o un'idea: la prototipia segue quattro fasi — brief, materiali, campione, approvazione."],
+  ["Lavorate in riservatezza?", "Sempre. Nessun nome e nessun logo sui nostri canali, e accordi di riservatezza su ogni progetto."],
+  ["Che pellami utilizzate?", "La nostra produzione è quasi interamente in pelle a concia vegetale, scelta con te tra le concerie del distretto toscano."],
+  ["Come iniziamo a lavorare insieme?", "Scrivici dalla pagina contatti: raccontaci prodotto, volumi e tempi. Rispondiamo entro due giorni lavorativi."],
+] as const;
 
 const ticker = ["Private Label", "Conto Terzi", "Piccole Serie", "Prototipia", "Concia vegetale", "Made in Italy", "Riservatezza assoluta", "Scandicci dal 1988"];
 
@@ -221,19 +229,33 @@ function Home() {
         </div>
       </section>
 
-      {/* 7 · Contatti — chiaro */}
-      <section data-nav="light" data-hide-cta>
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-36">
-          <Reveal><h2 className="display text-[clamp(4rem,14vw,12rem)]">Parliamo<span className="text-leather">.</span></h2></Reveal>
-          <Reveal delay={120} className="mt-10 flex flex-col gap-10 border-t border-border pt-10 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-lg text-muted-foreground md:text-xl">Raccontaci il tuo progetto: prodotto, volumi, tempi. Rispondiamo entro due giorni lavorativi, con riservatezza.</p>
-            <div className="flex flex-col gap-5 md:items-end">
-              <Cta to="/contatti">Parliamo del tuo progetto</Cta>
-              <a href="mailto:info@sigillosrl.com" className="text-lg font-medium underline-offset-4 hover:text-leather hover:underline">info@sigillosrl.com</a>
+      {/* 7 · FAQ — chiaro */}
+      <section data-nav="light">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-12 md:px-10 md:py-32">
+          <Reveal className="md:col-span-4">
+            <p className="eyebrow eyebrow-line text-leather">FAQ</p>
+            <h2 className="display mt-6 text-4xl md:text-6xl">Domande <span className="text-leather">frequenti.</span></h2>
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-8">
+            <div className="divide-y divide-border border-y border-border">
+              {faqs.map(([q, a]) => (
+                <details key={q} className="group py-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-xl font-medium md:text-2xl [&::-webkit-details-marker]:hidden">
+                    {q}
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-ink transition duration-300 group-open:rotate-45 group-open:bg-ink group-open:text-ink-foreground">
+                      <Plus className="h-4 w-4" />
+                    </span>
+                  </summary>
+                  <p className="mt-4 max-w-2xl text-muted-foreground">{a}</p>
+                </details>
+              ))}
             </div>
           </Reveal>
         </div>
       </section>
+
+      {/* 8 · Contatti — scuro, come nelle altre pagine */}
+      <CtaBand />
     </Layout>
   );
 }

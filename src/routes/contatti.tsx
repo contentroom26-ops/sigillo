@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
-import { Check, Clock, Globe, Mail, MapPin } from "lucide-react";
+import { Check, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowDot, ctaClasses } from "@/components/site/Cta";
@@ -73,6 +73,10 @@ function Page() {
               <div className="mt-10 space-y-8">
                 <Row icon={<Mail className="h-5 w-5" />} label="Email">
                   <a href="mailto:info@sigillosrl.com" className="font-medium underline-offset-4 hover:text-leather hover:underline">info@sigillosrl.com</a>
+                </Row>
+                <Row icon={<Phone className="h-5 w-5" />} label="Telefono">
+                  <a href="tel:+39055721175" className="font-medium underline-offset-4 hover:text-leather hover:underline">055 721175</a><br />
+                  <a href="tel:+393475175078" className="font-medium underline-offset-4 hover:text-leather hover:underline">+39 347 517 5078</a>
                 </Row>
                 <Row icon={<MapPin className="h-5 w-5" />} label="Sede">
                   Sigillo Srl<br />Scandicci (FI), Italia
