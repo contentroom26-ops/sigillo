@@ -65,7 +65,7 @@ function Navbar() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${bar}`}>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20 md:px-10">
         <Link to="/" aria-label="Sigillo, home">
-          <Logo variant={onDark ? "cuoio" : "marrone"} className="h-6 w-auto md:h-7" />
+          <Logo variant={onDark ? "cuoio" : "marrone"} className="h-8 w-auto md:h-10" />
         </Link>
         <nav className="hidden items-center gap-9 md:flex">
           {NAV.filter((n) => n.to !== "/contatti").map((n) => (
@@ -127,10 +127,10 @@ function MobileCta() {
 
 export function CtaBand({ title }: { title?: ReactNode }) {
   return (
-    <section data-nav="dark" className="bg-ink text-ink-foreground">
+    <section data-nav="dark" data-hide-cta className="bg-ink text-ink-foreground">
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-10 px-6 py-24 md:flex-row md:items-end md:justify-between md:px-10 md:py-32">
         <div>
-          <Logo variant="cuoio" className="mb-10 h-6 w-auto opacity-80" />
+          <Logo variant="cuoio" className="mb-10 h-10 w-auto md:h-12" />
           <h2 className="display max-w-2xl text-5xl md:text-7xl">
             {title ?? <>Parliamo del tuo <span className="text-tan">progetto.</span></>}
           </h2>
@@ -147,7 +147,7 @@ function Footer() {
     <footer data-nav="dark" data-hide-cta className="border-t border-ink-foreground/10 bg-ink text-ink-foreground">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 md:px-10">
         <div className="md:col-span-2">
-          <Logo variant="cuoio" className="h-7 w-auto" />
+          <Logo variant="cuoio" className="h-10 w-auto md:h-12" />
           <p className="mt-6 max-w-sm text-sm text-ink-foreground/60">
             Manifattura di cinture e piccola pelletteria per il lusso e la moda. Scandicci, Firenze · dal 1988.
           </p>
@@ -161,11 +161,15 @@ function Footer() {
         <div className="text-sm">
           <p className="eyebrow mb-4 text-tan">Contatti</p>
           <p className="text-ink-foreground/70">Sigillo Srl<br />Scandicci (FI), Italia</p>
-          <a href="mailto:info@sigillosrl.com" className="mt-2 block text-ink-foreground hover:text-tan">info@sigillosrl.com</a>
+          <ul className="mt-3 space-y-1 text-ink-foreground/70">
+            <li>Tel. <a href="tel:+39055721175" className="text-ink-foreground hover:text-tan">055 721175</a></li>
+            <li>Cell. <a href="tel:+393475175078" className="text-ink-foreground hover:text-tan">+39 347 517 5078</a></li>
+          </ul>
+          <a href="mailto:info@sigillosrl.com" className="mt-3 block text-ink-foreground hover:text-tan">info@sigillosrl.com</a>
         </div>
       </div>
-      <div className="mx-auto flex max-w-7xl justify-between border-t border-ink-foreground/10 px-6 py-6 text-xs text-ink-foreground/40 md:px-10">
-        <span>© {new Date().getFullYear()} Sigillo Srl</span><span>Made in Tuscany</span>
+      <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 border-t border-ink-foreground/10 px-6 py-6 text-xs text-ink-foreground/40 md:px-10">
+        <span>© {new Date().getFullYear()} Sigillo Srl · P. IVA 04536710488</span><span>Made in Tuscany</span>
       </div>
     </footer>
   );
@@ -188,6 +192,21 @@ export function PageHeader({ eyebrow, title, intro }: { eyebrow: string; title: 
       <p className="eyebrow eyebrow-line reveal is-visible text-leather">{eyebrow}</p>
       <h1 className="display mt-6 max-w-5xl text-5xl sm:text-6xl md:text-8xl">{title}</h1>
       {intro && <p className="mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl">{intro}</p>}
+    </section>
+  );
+}
+
+/** Intestazione delle pagine interne: foto di sfondo con overlay scuro (i colori si gestiscono nella foto). */
+export function PageHero({ eyebrow, title, intro, image, alt }: { eyebrow: string; title: ReactNode; intro?: string; image: string; alt: string }) {
+  return (
+    <section data-nav="dark" className="relative isolate flex min-h-[64svh] items-end overflow-hidden bg-ink text-ink-foreground md:min-h-[72svh]">
+      <img src={image} alt={alt} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/55 to-ink/90" />
+      <div className="mx-auto w-full max-w-7xl px-6 pb-16 pt-40 md:px-10 md:pb-24 md:pt-48">
+        <p className="eyebrow eyebrow-line reveal is-visible text-tan [text-shadow:0_1px_10px_rgb(28_24_20/0.9)]">{eyebrow}</p>
+        <h1 className="display reveal is-visible mt-6 max-w-5xl text-5xl sm:text-6xl md:text-8xl">{title}</h1>
+        {intro && <p className="mt-8 max-w-2xl text-lg font-medium text-ink-foreground [text-shadow:0_1px_14px_rgb(28_24_20/0.85)] md:text-xl">{intro}</p>}
+      </div>
     </section>
   );
 }
