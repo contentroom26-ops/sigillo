@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Check, Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
@@ -151,6 +151,12 @@ function Page() {
                       </label>
                     </div>
                     <label className="block"><span className="eyebrow text-muted-foreground">Messaggio *</span><textarea required name="messaggio" rows={5} placeholder="Raccontaci il tuo progetto: prodotto, volumi, tempi…" className={`${field} resize-none`} /></label>
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input required type="checkbox" name="privacy" className="mt-1 h-4 w-4 shrink-0 rounded border-border accent-ink" />
+                      <span className="text-sm text-muted-foreground leading-snug">
+                        Ho letto l'<Link to="/privacy" className="underline underline-offset-2 hover:text-leather">informativa sulla privacy</Link> e acconsento al trattamento dei miei dati personali per essere ricontattato. *
+                      </span>
+                    </label>
                     <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
                       <button disabled={state === "sending"} className={`${c.box} disabled:opacity-60`}>
                         <span>{state === "sending" ? "Invio in corso…" : "Invia messaggio"}</span>
