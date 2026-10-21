@@ -11,10 +11,11 @@ import detBufalo from "@/assets/det-bufalo.jpg";
 export const Route = createFileRoute("/prototipia")({
   head: () => ({
     meta: [
-      { title: "Prototipia — Sigillo, cinture in pelle" },
-      { name: "description", content: "Dal brief al campione approvato in quattro fasi: brief, materiali, campione, approvazione." },
-      { property: "og:title", content: "Prototipia — Sigillo" },
-      { property: "og:description", content: "Brief, materiali, campione, approvazione. Il metodo Sigillo." },
+      { title: "Prototipia cinture in pelle — Dal brief al campione | Sigillo" },
+      { name: "description", content: "Sviluppo prototipi di cinture in pelle in quattro fasi: brief, selezione materiali, campionatura e approvazione. Manifattura Sigillo, Scandicci." },
+      { property: "og:title", content: "Prototipia cinture — Dal brief al campione approvato | Sigillo" },
+      { property: "og:description", content: "Quattro fasi, un referente dedicato. Dal brief al campione approvato. Scandicci, Firenze." },
+      { property: "og:url", content: "https://sigillosrl.com/prototipia" },
     ],
   }),
   component: Page,

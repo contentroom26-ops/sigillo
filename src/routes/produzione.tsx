@@ -13,10 +13,11 @@ import detBufalo from "@/assets/det-bufalo.jpg";
 export const Route = createFileRoute("/produzione")({
   head: () => ({
     meta: [
-      { title: "Produzione — Private label, conto terzi, piccole serie | Sigillo" },
-      { name: "description", content: "Tre modalità di produzione di cinture in pelle: private label, conto terzi e piccole serie da 80–100 pezzi." },
-      { property: "og:title", content: "Produzione — Sigillo" },
-      { property: "og:description", content: "Private label, conto terzi, piccole serie. Manifattura a Scandicci." },
+      { title: "Produzione cinture in pelle — Private label, conto terzi, piccole serie | Sigillo" },
+      { name: "description", content: "Tre modalità di produzione: private label con il tuo brand, conto terzi su specifiche, piccole serie da 80–100 pezzi. Cinture in pelle made in Tuscany." },
+      { property: "og:title", content: "Produzione cinture — Private label, conto terzi, piccole serie | Sigillo" },
+      { property: "og:description", content: "Private label, conto terzi, piccole serie. Cinture in pelle made in Tuscany. Scandicci, Firenze." },
+      { property: "og:url", content: "https://sigillosrl.com/produzione" },
     ],
   }),
   component: Page,

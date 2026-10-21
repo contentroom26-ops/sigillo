@@ -18,10 +18,11 @@ import design from "@/assets/cintura-design.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sigillo — Dalla pelle al prodotto finito" },
-      { name: "description", content: "Manifattura toscana di cinture in pelle per brand del lusso e della moda. Private label, conto terzi, piccole serie. Scandicci, dal 1988." },
-      { property: "og:title", content: "Sigillo — Dalla pelle al prodotto finito" },
-      { property: "og:description", content: "Cinture e piccola pelletteria per le maison. Scandicci, Firenze · dal 1988." },
+      { title: "Sigillo — Manifattura di cinture in pelle | Scandicci, Firenze" },
+      { name: "description", content: "Manifattura toscana di cinture e piccola pelletteria per brand del lusso e della moda. Private label, conto terzi, piccole serie. Scandicci, Firenze, dal 1988." },
+      { property: "og:title", content: "Sigillo — Manifattura di cinture in pelle, Scandicci" },
+      { property: "og:description", content: "Private label, conto terzi, piccole serie. Manifattura toscana dal 1988." },
+      { property: "og:url", content: "https://sigillosrl.com/" },
     ],
   }),
   component: Home,
@@ -53,7 +54,7 @@ const faqs = [
   ["Posso partire solo da un'idea o da un disegno?", "Sì. Si può partire da un disegno, un campione, una foto o un'idea: la prototipia segue quattro fasi — brief, materiali, campione, approvazione."],
   ["Lavorate in riservatezza?", "Sempre. Nessun nome e nessun logo sui nostri canali, e accordi di riservatezza su ogni progetto."],
   ["Che pellami utilizzate?", "La nostra produzione è quasi interamente in pelle a concia vegetale, scelta con te tra le concerie del distretto toscano."],
-  ["Come iniziamo a lavorare insieme?", "Scrivici dalla pagina contatti: raccontaci prodotto, volumi e tempi. Rispondiamo entro due giorni lavorativi."],
+  ["Come iniziamo a lavorare insieme?", "Scrivici dalla pagina contatti: raccontaci prodotto, volumi e tempi. Rispondiamo nella giornata."],
 ] as const;
 
 const ticker = ["Private Label", "Conto Terzi", "Piccole Serie", "Prototipia", "Concia vegetale", "Made in Italy", "Riservatezza assoluta", "Scandicci dal 1988"];

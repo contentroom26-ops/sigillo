@@ -78,9 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sigillo — Manifattura di cinture in pelle, Scandicci" },
-      { name: "description", content: "Cinture e piccola pelletteria per il lusso e la moda. Private label, conto terzi, piccole serie. Scandicci, Firenze, dal 1988." },
+      { title: "Sigillo — Manifattura di cinture in pelle | Scandicci, Firenze" },
+      { name: "description", content: "Cinture e piccola pelletteria per brand del lusso e della moda. Private label, conto terzi, piccole serie. Manifattura a Scandicci, Firenze, dal 1988." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Sigillo Srl" },
+      { property: "og:image", content: "https://sigillosrl.com/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:locale", content: "it_IT" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

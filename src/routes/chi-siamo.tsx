@@ -10,10 +10,11 @@ import detBlu from "@/assets/det-blu.jpg";
 export const Route = createFileRoute("/chi-siamo")({
   head: () => ({
     meta: [
-      { title: "Chi siamo — Sigillo Srl, Scandicci dal 1988" },
-      { name: "description", content: "Manifattura toscana di cinture in pelle fondata nel 1988 a Scandicci. Distretto, specializzazione, riservatezza." },
-      { property: "og:title", content: "Chi siamo — Sigillo Srl" },
-      { property: "og:description", content: "Scandicci, dal 1988. Europa, USA, Australia." },
+      { title: "Chi siamo — Manifattura di cinture in pelle dal 1988 | Sigillo, Scandicci" },
+      { name: "description", content: "Sigillo Srl: manifattura toscana di cinture e piccola pelletteria fondata nel 1988 a Scandicci, nel distretto della pelletteria fiorentina. Riservatezza, qualità, esperienza." },
+      { property: "og:title", content: "Chi siamo — Sigillo Srl, manifattura dal 1988" },
+      { property: "og:description", content: "Scandicci, distretto della pelletteria fiorentina, dal 1988. Serviamo brand in Europa, USA e Australia." },
+      { property: "og:url", content: "https://sigillosrl.com/chi-siamo" },
     ],
   }),
   component: Page,

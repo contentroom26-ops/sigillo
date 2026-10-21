@@ -8,10 +8,11 @@ import { ArrowDot, ctaClasses } from "@/components/site/Cta";
 export const Route = createFileRoute("/contatti")({
   head: () => ({
     meta: [
-      { title: "Contatti — Parliamo del tuo progetto | Sigillo" },
-      { name: "description", content: "Scrivi a Sigillo per prototipi, private label, conto terzi o piccole serie di cinture in pelle." },
-      { property: "og:title", content: "Contatti — Sigillo" },
-      { property: "og:description", content: "Parliamo del tuo progetto. info@sigillosrl.com" },
+      { title: "Contattaci — Parliamo del tuo progetto | Sigillo" },
+      { name: "description", content: "Scrivi a Sigillo per prototipi, private label, conto terzi o piccole serie di cinture in pelle. Rispondiamo nella giornata." },
+      { property: "og:title", content: "Contattaci — Sigillo, manifattura cinture in pelle" },
+      { property: "og:description", content: "Parliamo del tuo progetto. Rispondiamo nella giornata. info@sigillosrl.com" },
+      { property: "og:url", content: "https://sigillosrl.com/contatti" },
     ],
   }),
   component: Page,
@@ -22,7 +23,7 @@ const field =
 
 const next = [
   ["Ci racconti il progetto", "Prodotto, volumi, tempi: anche solo un'idea o un riferimento."],
-  ["Ti rispondiamo", "Entro due giorni lavorativi, con un referente dedicato."],
+  ["Ti rispondiamo", "Nella giornata, con un referente dedicato."],
   ["Definiamo il passo successivo", "Una call, una visita in showroom o la campionatura."],
 ] as const;
 
@@ -88,7 +89,7 @@ function Page() {
             Parliamo del <span className="text-tan">tuo progetto.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base text-ink-foreground/70 md:text-lg">
-            Scrivici, chiama o compila il form: rispondiamo entro due giorni lavorativi, in totale riservatezza.
+            Scrivici, chiama o compila il form: rispondiamo nella giornata, in totale riservatezza.
           </p>
         </div>
       </section>
@@ -111,7 +112,7 @@ function Page() {
                   Sigillo Srl<br />Scandicci (FI), Italia
                 </Row>
                 <Row icon={<Globe className="h-5 w-5" />} label="Mercati">Europa · USA · Australia</Row>
-                <Row icon={<Clock className="h-5 w-5" />} label="Tempi di risposta">Entro due giorni lavorativi</Row>
+                <Row icon={<Clock className="h-5 w-5" />} label="Tempi di risposta">Nella giornata</Row>
               </div>
               <p className="mt-10 border-t border-border pt-6 text-sm text-muted-foreground">
                 Nessun nome e nessun logo sui nostri canali — solo il prodotto che porta il tuo.
@@ -125,7 +126,7 @@ function Page() {
                 <div className="flex h-full flex-col justify-center py-10">
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-ink-foreground"><Check className="h-6 w-6" /></span>
                   <h2 className="display mt-8 text-4xl md:text-5xl">Grazie, messaggio ricevuto.</h2>
-                  <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo entro due giorni lavorativi.</p>
+                  <p className="mt-4 text-lg text-muted-foreground">Ti risponderemo nella giornata.</p>
                 </div>
               ) : (
                 <>
@@ -162,7 +163,7 @@ function Page() {
                         <span>{state === "sending" ? "Invio in corso…" : "Invia messaggio"}</span>
                         <ArrowDot className={c.dot} />
                       </button>
-                      <p className="text-sm text-muted-foreground">Rispondiamo entro due giorni lavorativi. Nessun impegno.</p>
+                      <p className="text-sm text-muted-foreground">Rispondiamo nella giornata. Nessun impegno.</p>
                     </div>
                     {state === "error" && (
                       <p className="mt-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
