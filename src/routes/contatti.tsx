@@ -109,9 +109,9 @@ function Page() {
                   <a href="tel:+393475175078" className="font-medium underline-offset-4 hover:text-leather hover:underline">+39 347 517 5078</a>
                 </Row>
                 <Row icon={<MapPin className="h-5 w-5" />} label="Sede">
-                  Sigillo Srl<br />Scandicci (FI), Italia
+                  Sigillo Srl<br />Via Ilio Barontini n. 15/B<br />50010 Scandicci (Firenze), Italia
                 </Row>
-                <Row icon={<Globe className="h-5 w-5" />} label="Mercati">Europa · USA · Australia</Row>
+                <Row icon={<Globe className="h-5 w-5" />} label="Mercati">Europa · USA · Australia · Nuova Zelanda · Canada</Row>
                 <Row icon={<Clock className="h-5 w-5" />} label="Tempi di risposta">Nella giornata</Row>
               </div>
               <p className="mt-10 border-t border-border pt-6 text-sm text-muted-foreground">
