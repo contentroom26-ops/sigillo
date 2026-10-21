@@ -1,0 +1,9 @@
+<svg width="32" height="32" viewBox="-5 -4 46 50" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    :root { --c: #3d2b1a; }
+    @media (prefers-color-scheme: dark) { :root { --c: #b8a06a; } }
+  </style>
+  <rect x="0" y="0" width="36" height="42" rx="4" ry="4" fill="none" stroke="var(--c)" stroke-width="4" stroke-linejoin="round"/>
+  <line x1="0" y1="21" x2="36" y2="21" stroke="var(--c)" stroke-width="4" stroke-linecap="square"/>
+  <circle cx="18" cy="21" r="4" fill="var(--c)"/>
+</svg>
