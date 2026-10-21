@@ -134,7 +134,7 @@ export function CtaBand({ title }: { title?: ReactNode }) {
           <h2 className="display max-w-2xl text-5xl md:text-7xl">
             {title ?? <>Parliamo del tuo <span className="text-tan">progetto.</span></>}
           </h2>
-          <p className="mt-6 max-w-md text-ink-foreground/60">Raccontaci prodotto, volumi e tempi. Rispondiamo entro due giorni lavorativi, senza impegno.</p>
+          <p className="mt-6 max-w-md text-ink-foreground/60">Raccontaci prodotto, volumi e tempi. Rispondiamo nella giornata, senza impegno.</p>
         </div>
         <Cta to="/contatti" tone="dark">Contattaci</Cta>
       </div>
