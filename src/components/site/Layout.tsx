@@ -160,7 +160,12 @@ function Footer() {
         </div>
         <div className="text-sm">
           <p className="eyebrow mb-4 text-tan">Contatti</p>
-          <p className="text-ink-foreground/70">Sigillo Srl<br />Scandicci (FI), Italia</p>
+          <address className="not-italic text-ink-foreground/70">
+            Sigillo Srl<br />
+            Via Ilio Barontini n. 15/B<br />
+            50010 Scandicci (Firenze), Italia<br />
+            P. IVA 04536710488
+          </address>
           <ul className="mt-3 space-y-1 text-ink-foreground/70">
             <li>Tel. <a href="tel:+39055721175" className="text-ink-foreground hover:text-tan">055 721175</a></li>
             <li>Cell. <a href="tel:+393475175078" className="text-ink-foreground hover:text-tan">+39 347 517 5078</a></li>
@@ -169,7 +174,9 @@ function Footer() {
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 border-t border-ink-foreground/10 px-6 py-6 text-xs text-ink-foreground/40 md:px-10">
-        <span>© {new Date().getFullYear()} Sigillo Srl · P. IVA 04536710488</span><span>Made in Tuscany</span>
+        <span>© {new Date().getFullYear()} Sigillo Srl · P. IVA 04536710488</span>
+        <Link to="/privacy" className="hover:text-ink-foreground/70 transition-colors">Privacy Policy</Link>
+        <span>Made in Tuscany</span>
       </div>
     </footer>
   );
