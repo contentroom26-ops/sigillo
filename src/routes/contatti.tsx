@@ -39,11 +39,40 @@ function Row({ icon, label, children }: { icon: ReactNode; label: string; childr
 }
 
 function Page() {
-  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
-  const submit = (e: FormEvent) => {
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setState("sending");
-    setTimeout(() => setState("done"), 800);
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const data = {
+      nome: (form.elements.namedItem("nome") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      azienda: (form.elements.namedItem("azienda") as HTMLInputElement).value,
+      tipo: (form.elements.namedItem("tipo") as HTMLSelectElement).value,
+      messaggio: (form.elements.namedItem("messaggio") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        setErrorMsg(json.error ?? "Qualcosa è andato storto. Riprova.");
+        setState("error");
+      } else {
+        setState("done");
+      }
+    } catch {
+      setErrorMsg("Connessione interrotta. Riprova o scrivi a info@sigillosrl.com.");
+      setState("error");
+    }
   };
   const c = ctaClasses("solid", "light");
 
@@ -129,6 +158,12 @@ function Page() {
                       </button>
                       <p className="text-sm text-muted-foreground">Rispondiamo entro due giorni lavorativi. Nessun impegno.</p>
                     </div>
+                    {state === "error" && (
+                      <p className="mt-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+                        {errorMsg}{" "}
+                        <button type="button" onClick={() => setState("idle")} className="underline underline-offset-2">Riprova</button>
+                      </p>
+                    )}
                   </form>
                 </>
               )}
