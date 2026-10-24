@@ -10,14 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LangRouteImport } from './routes/$lang'
 import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
 import { Route as ContattiRouteImport } from './routes/contatti'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProduzioneRouteImport } from './routes/produzione'
 import { Route as PrototipiaRouteImport } from './routes/prototipia'
+import { Route as LangIndexRouteImport } from './routes/$lang/index'
+import { Route as LangChiSiamoRouteImport } from './routes/$lang/chi-siamo'
+import { Route as LangContattiRouteImport } from './routes/$lang/contatti'
+import { Route as LangPrivacyRouteImport } from './routes/$lang/privacy'
+import { Route as LangProduzioneRouteImport } from './routes/$lang/produzione'
+import { Route as LangPrototipiaRouteImport } from './routes/$lang/prototipia'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChiSiamoRoute = ChiSiamoRouteImport.update({
@@ -30,6 +44,11 @@ const ContattiRoute = ContattiRouteImport.update({
   path: '/contatti',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProduzioneRoute = ProduzioneRouteImport.update({
   id: '/produzione',
   path: '/produzione',
@@ -40,49 +59,149 @@ const PrototipiaRoute = PrototipiaRouteImport.update({
   path: '/prototipia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangChiSiamoRoute = LangChiSiamoRouteImport.update({
+  id: '/chi-siamo',
+  path: '/chi-siamo',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangContattiRoute = LangContattiRouteImport.update({
+  id: '/contatti',
+  path: '/contatti',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangPrivacyRoute = LangPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangProduzioneRoute = LangProduzioneRouteImport.update({
+  id: '/produzione',
+  path: '/produzione',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangPrototipiaRoute = LangPrototipiaRouteImport.update({
+  id: '/prototipia',
+  path: '/prototipia',
+  getParentRoute: () => LangRoute,
+} as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$lang': typeof LangRouteWithChildren
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/privacy': typeof PrivacyRoute
   '/produzione': typeof ProduzioneRoute
   '/prototipia': typeof PrototipiaRoute
+  '/$lang/chi-siamo': typeof LangChiSiamoRoute
+  '/$lang/contatti': typeof LangContattiRoute
+  '/$lang/privacy': typeof LangPrivacyRoute
+  '/$lang/produzione': typeof LangProduzioneRoute
+  '/$lang/prototipia': typeof LangPrototipiaRoute
+  '/api/contact': typeof ApiContactRoute
+  '/$lang/': typeof LangIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/privacy': typeof PrivacyRoute
   '/produzione': typeof ProduzioneRoute
   '/prototipia': typeof PrototipiaRoute
+  '/$lang/chi-siamo': typeof LangChiSiamoRoute
+  '/$lang/contatti': typeof LangContattiRoute
+  '/$lang/privacy': typeof LangPrivacyRoute
+  '/$lang/produzione': typeof LangProduzioneRoute
+  '/$lang/prototipia': typeof LangPrototipiaRoute
+  '/api/contact': typeof ApiContactRoute
+  '/$lang': typeof LangIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$lang': typeof LangRouteWithChildren
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/privacy': typeof PrivacyRoute
   '/produzione': typeof ProduzioneRoute
   '/prototipia': typeof PrototipiaRoute
+  '/$lang/chi-siamo': typeof LangChiSiamoRoute
+  '/$lang/contatti': typeof LangContattiRoute
+  '/$lang/privacy': typeof LangPrivacyRoute
+  '/$lang/produzione': typeof LangProduzioneRoute
+  '/$lang/prototipia': typeof LangPrototipiaRoute
+  '/api/contact': typeof ApiContactRoute
+  '/$lang/': typeof LangIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chi-siamo' | '/contatti' | '/produzione' | '/prototipia'
+  fullPaths:
+    | '/'
+    | '/$lang'
+    | '/chi-siamo'
+    | '/contatti'
+    | '/privacy'
+    | '/produzione'
+    | '/prototipia'
+    | '/$lang/chi-siamo'
+    | '/$lang/contatti'
+    | '/$lang/privacy'
+    | '/$lang/produzione'
+    | '/$lang/prototipia'
+    | '/api/contact'
+    | '/$lang/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chi-siamo' | '/contatti' | '/produzione' | '/prototipia'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/chi-siamo'
     | '/contatti'
+    | '/privacy'
     | '/produzione'
     | '/prototipia'
+    | '/$lang/chi-siamo'
+    | '/$lang/contatti'
+    | '/$lang/privacy'
+    | '/$lang/produzione'
+    | '/$lang/prototipia'
+    | '/api/contact'
+    | '/$lang'
+  id:
+    | '__root__'
+    | '/'
+    | '/$lang'
+    | '/chi-siamo'
+    | '/contatti'
+    | '/privacy'
+    | '/produzione'
+    | '/prototipia'
+    | '/$lang/chi-siamo'
+    | '/$lang/contatti'
+    | '/$lang/privacy'
+    | '/$lang/produzione'
+    | '/$lang/prototipia'
+    | '/api/contact'
+    | '/$lang/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LangRoute: typeof LangRouteWithChildren
   ChiSiamoRoute: typeof ChiSiamoRoute
   ContattiRoute: typeof ContattiRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProduzioneRoute: typeof ProduzioneRoute
   PrototipiaRoute: typeof PrototipiaRoute
+  ApiContactRoute: typeof ApiContactRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +211,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chi-siamo': {
@@ -108,6 +234,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContattiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/produzione': {
       id: '/produzione'
       path: '/produzione'
@@ -122,15 +255,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrototipiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/chi-siamo': {
+      id: '/$lang/chi-siamo'
+      path: '/chi-siamo'
+      fullPath: '/$lang/chi-siamo'
+      preLoaderRoute: typeof LangChiSiamoRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/contatti': {
+      id: '/$lang/contatti'
+      path: '/contatti'
+      fullPath: '/$lang/contatti'
+      preLoaderRoute: typeof LangContattiRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/privacy': {
+      id: '/$lang/privacy'
+      path: '/privacy'
+      fullPath: '/$lang/privacy'
+      preLoaderRoute: typeof LangPrivacyRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/produzione': {
+      id: '/$lang/produzione'
+      path: '/produzione'
+      fullPath: '/$lang/produzione'
+      preLoaderRoute: typeof LangProduzioneRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/prototipia': {
+      id: '/$lang/prototipia'
+      path: '/prototipia'
+      fullPath: '/$lang/prototipia'
+      preLoaderRoute: typeof LangPrototipiaRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface LangRouteChildren {
+  LangChiSiamoRoute: typeof LangChiSiamoRoute
+  LangContattiRoute: typeof LangContattiRoute
+  LangPrivacyRoute: typeof LangPrivacyRoute
+  LangProduzioneRoute: typeof LangProduzioneRoute
+  LangPrototipiaRoute: typeof LangPrototipiaRoute
+  LangIndexRoute: typeof LangIndexRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangChiSiamoRoute: LangChiSiamoRoute,
+  LangContattiRoute: LangContattiRoute,
+  LangPrivacyRoute: LangPrivacyRoute,
+  LangProduzioneRoute: LangProduzioneRoute,
+  LangPrototipiaRoute: LangPrototipiaRoute,
+  LangIndexRoute: LangIndexRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LangRoute: LangRouteWithChildren,
   ChiSiamoRoute: ChiSiamoRoute,
   ContattiRoute: ContattiRoute,
+  PrivacyRoute: PrivacyRoute,
   ProduzioneRoute: ProduzioneRoute,
   PrototipiaRoute: PrototipiaRoute,
+  ApiContactRoute: ApiContactRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
