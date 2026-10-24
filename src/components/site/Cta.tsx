@@ -1,8 +1,8 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
+import type { RoutePath } from "@/i18n";
+import { LocLink } from "./LocLink";
 
-type RoutePath = "/" | "/prototipia" | "/produzione" | "/chi-siamo" | "/contatti";
 type Variant = "solid" | "outline";
 /** Il colore dello sfondo su cui il bottone è appoggiato. */
 type Tone = "light" | "dark";
@@ -71,7 +71,7 @@ export function Cta({ children, variant = "solid", tone = "light", size = "md", 
   );
   const cls = `${c.box} ${className}`;
   return to ? (
-    <Link to={to} className={cls}>{inner}</Link>
+    <LocLink to={to} className={cls}>{inner}</LocLink>
   ) : (
     <a href={href} className={cls}>{inner}</a>
   );
