@@ -14,7 +14,7 @@ import elegante from "@/assets/cintura-elegante.jpg";
 import intrecciata from "@/assets/cintura-intrecciata.jpg";
 import casual from "@/assets/cintura-casual.jpg";
 import rossa from "@/assets/cintura-rossa.jpg";
-import design from "@/assets/cintura-design.jpg";
+import design from "@/assets/cintura-design.jpg"; 
 
 // Struttura (link, foto) qui; i testi sono nel dizionario, nello stesso ordine.
 const serviceLinks = [
